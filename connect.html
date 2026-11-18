@@ -14,7 +14,7 @@ const ck = q.get('ck'), state = q.get('state'), scope = q.get('scope') || 'user.
 document.getElementById('go').onclick = () => {
   if (!ck || !state) { document.getElementById('err').textContent = 'Start this from the clipper app (tiktok-login).'; return; }
   const p = new URLSearchParams({client_key: ck, scope, response_type: 'code',
-    redirect_uri: location.origin + '/callback/', state});
+    redirect_uri: location.origin + '/callback/', state, disable_auto_auth: '1'});
   location.href = 'https://www.tiktok.com/v2/auth/authorize/?' + p;
 };
 </script></body></html>
