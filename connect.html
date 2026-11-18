@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Connect TikTok – SixStarSteve Clipper</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;line-height:1.6;background:#111;color:#eee;text-align:center}h1{color:#ffd54a}a{color:#ffd54a}.btn{display:inline-block;background:#fe2c55;color:#fff;font-weight:700;font-size:18px;padding:14px 28px;border-radius:10px;text-decoration:none;border:0;cursor:pointer}.card{background:#1c1c1c;border-radius:14px;padding:24px;margin:24px 0}img{width:120px;height:120px;border-radius:50%}input{width:100%;padding:10px;border-radius:8px;border:1px solid #444;background:#000;color:#eee}small{color:#999}</style></head><body>
+<img src="avatar.png" alt="Steve">
+<h1>SixStarSteve Clipper</h1>
+<div class="card">
+<p>Connect your TikTok account so the clipper can send finished clips to your <b>TikTok inbox as drafts</b>.<br>Nothing is posted until you open the draft in TikTok and tap <b>Post</b>.</p>
+<p><small>Permissions requested: basic profile info (to show which account is connected) and video upload (to send drafts).</small></p>
+<button class="btn" id="go">Continue with TikTok</button>
+<p id="err" style="color:#f66"></p>
+</div>
+<p><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
+<script>
+const q = new URLSearchParams(location.search);
+const ck = q.get('ck'), state = q.get('state'), scope = q.get('scope') || 'user.info.basic,video.upload';
+document.getElementById('go').onclick = () => {
+  if (!ck || !state) { document.getElementById('err').textContent = 'Start this from the clipper app (tiktok-login).'; return; }
+  const p = new URLSearchParams({client_key: ck, scope, response_type: 'code',
+    redirect_uri: location.origin + '/callback/', state});
+  location.href = 'https://www.tiktok.com/v2/auth/authorize/?' + p;
+};
+</script></body></html>

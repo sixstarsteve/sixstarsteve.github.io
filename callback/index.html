@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Connected – SixStarSteve Clipper</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;line-height:1.6;background:#111;color:#eee;text-align:center}h1{color:#ffd54a}a{color:#ffd54a}.btn{display:inline-block;background:#fe2c55;color:#fff;font-weight:700;font-size:18px;padding:14px 28px;border-radius:10px;text-decoration:none;border:0;cursor:pointer}.card{background:#1c1c1c;border-radius:14px;padding:24px;margin:24px 0}img{width:120px;height:120px;border-radius:50%}input{width:100%;padding:10px;border-radius:8px;border:1px solid #444;background:#000;color:#eee}small{color:#999}</style></head><body>
+<img src="../avatar.png" alt="Steve">
+<div class="card" id="ok">
+<h1>TikTok connected ✅</h1>
+<p>Last step: click <b>Copy</b>, go back to the clipper window and paste.</p>
+<p><input id="u" readonly></p>
+<button class="btn" id="copy">Copy</button>
+</div>
+<div class="card" id="bad" style="display:none"><h1>Not connected</h1><p>You cancelled or something went wrong. Run tiktok-login again.</p></div>
+<script>
+const q = new URLSearchParams(location.search);
+if (!q.get('code')) { document.getElementById('ok').style.display='none'; document.getElementById('bad').style.display='block'; }
+const u = document.getElementById('u'); u.value = location.href;
+document.getElementById('copy').onclick = async () => {
+  try { await navigator.clipboard.writeText(u.value); } catch (e) { u.select(); document.execCommand('copy'); }
+  document.getElementById('copy').textContent = 'Copied ✓';
+};
+</script></body></html>
