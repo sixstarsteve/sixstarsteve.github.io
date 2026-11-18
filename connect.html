@@ -2,15 +2,15 @@
 <img src="avatar.png" alt="Steve">
 <h1>SixStarSteve Clipper</h1>
 <div class="card">
-<p>Connect your TikTok account so the clipper can send finished clips to your <b>TikTok inbox as drafts</b>.<br>Nothing is posted until you open the draft in TikTok and tap <b>Post</b>.</p>
-<p><small>Permissions requested: basic profile info (to show which account is connected) and video upload (to send drafts).</small></p>
+<p>Connect your TikTok account so the clipper can <b>post your finished clips to your own TikTok profile</b>.<br>It only ever posts to the account you connect here, with the privacy setting you choose in the clipper.</p>
+<p><small>Permissions requested: basic profile info (to show which account is connected), video upload and video publish (to post your clips).</small></p>
 <button class="btn" id="go">Continue with TikTok</button>
 <p id="err" style="color:#f66"></p>
 </div>
 <p><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
 <script>
 const q = new URLSearchParams(location.search);
-const ck = q.get('ck'), state = q.get('state'), scope = q.get('scope') || 'user.info.basic,video.upload';
+const ck = q.get('ck'), state = q.get('state'), scope = q.get('scope') || 'user.info.basic,video.upload,video.publish';
 document.getElementById('go').onclick = () => {
   if (!ck || !state) { document.getElementById('err').textContent = 'Start this from the clipper app (tiktok-login).'; return; }
   const p = new URLSearchParams({client_key: ck, scope, response_type: 'code',
